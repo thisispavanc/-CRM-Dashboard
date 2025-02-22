@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Data Accuracy Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">CRM Data Accuracy Dashboard</h1>
+        <div class="row mt-4">
+            <!-- Feature Importance -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Feature Importance</div>
+                    <div class="card-body">
+                        <canvas id="featureImportanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- Error Distribution -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Error Distribution</div>
+                    <div class="card-body">
+                        <canvas id="errorDistributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <!-- Correlation Heatmap Placeholder -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Correlation Heatmap</div>
+                    <div class="card-body text-center">
+                        <img id="heatmapImage" src="heatmap.png" class="img-fluid" alt="Correlation Heatmap">
+                    </div>
+                </div>
+            </div>
+            <!-- Accuracy Trend Over Time -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Accuracy Trend Over Time</div>
+                    <div class="card-body">
+                        <canvas id="accuracyTrendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createCharts() {
+            const featureImportanceCtx = document.getElementById('featureImportanceChart').getContext('2d');
+            new Chart(featureImportanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Field Completeness', 'Format Correctness', 'Duplicate Entries'],
+                    datasets: [{
+                        label: 'Importance Score',
+                        data: [80, 70, 60],
+                        backgroundColor: ['#4CAF50', '#FFC107', '#FF5722']
+                    }]
+                }
+            });
+            
+            const errorDistributionCtx = document.getElementById('errorDistributionChart').getContext('2d');
+            new Chart(errorDistributionCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Missing Fields', 'Incorrect Formats', 'Duplicate Entries'],
+                    datasets: [{
+                        data: [40, 30, 30],
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                    }]
+                }
+            });
+            
+            const accuracyTrendCtx = document.getElementById('accuracyTrendChart').getContext('2d');
+            new Chart(accuracyTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Accuracy %',
+                        data: [75, 78, 80, 85, 88],
+                        borderColor: '#4CAF50',
+                        fill: false
+                    }]
+                }
+            });
+        }
+        
+        window.onload = createCharts;
+    </script>
+</body>
+</html>
